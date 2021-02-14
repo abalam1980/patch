@@ -1,0 +1,39 @@
+From 8aea44c24870edb4839401a625f28e2e2028b4f2 Mon Sep 17 00:00:00 2001
+From: cjh1249131356 <cjh1249131356@gmail.com>
+Date: Sun, 14 Feb 2021 22:18:59 +0800
+Subject: [PATCH] SystemUI: Hardcode heads up padding left
+
+---
+ packages/SystemUI/res/values/havoc_dimens.xml                 | 3 +++
+ .../com/android/systemui/statusbar/HeadsUpStatusBarView.java  | 4 +---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/packages/SystemUI/res/values/havoc_dimens.xml b/packages/SystemUI/res/values/havoc_dimens.xml
+index 75b7ab853832..52794e81f3df 100644
+--- a/packages/SystemUI/res/values/havoc_dimens.xml
++++ b/packages/SystemUI/res/values/havoc_dimens.xml
+@@ -18,6 +18,9 @@
+ -->
+ <resources>
+ 
++    <!-- Margin on the left side of the heads up notification -->
++    <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
++
+     <!-- Burn-in protection -->
+     <dimen name="horizontal_max_swift">3.0dp</dimen>
+     <dimen name="vertical_max_swift">1.0dp</dimen>
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/HeadsUpStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/HeadsUpStatusBarView.java
+index b33424c563a3..6da659b63233 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/HeadsUpStatusBarView.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/HeadsUpStatusBarView.java
+@@ -79,9 +79,7 @@ public HeadsUpStatusBarView(Context context, AttributeSet attrs, int defStyleAtt
+             int defStyleRes) {
+         super(context, attrs, defStyleAttr, defStyleRes);
+         Resources res = getResources();
+-        mAbsoluteStartPadding = res.getDimensionPixelSize(R.dimen.notification_side_paddings)
+-            + res.getDimensionPixelSize(
+-                    com.android.internal.R.dimen.notification_content_margin_start);
++        mAbsoluteStartPadding = res.getDimensionPixelSize(R.dimen.heads_up_status_bar_padding_start);
+         mEndMargin = res.getDimensionPixelSize(
+                 com.android.internal.R.dimen.notification_content_margin_end);
+         setPaddingRelative(mAbsoluteStartPadding, 0, mEndMargin, 0);
